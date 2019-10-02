@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Homework1",
+            "request": "launch",
+            "mainClass": "Homework1",
+            "console": "integratedTerminal"
+        }
+    ]
+}
