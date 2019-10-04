@@ -4,8 +4,8 @@
             "type": "java",
             "name": "CodeLens (Launch) - BlockTracer",
             "request": "launch",
-            "mainClass": "BlockTracer",
-            "projectName": "CSE214_19d75cf9"
+            "mainClass": "app.BlockTracer",
+            "projectName": "HomeWork3"
         }
     ]
 }
