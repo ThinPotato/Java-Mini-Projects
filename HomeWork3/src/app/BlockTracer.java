@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.Scanner;
 
 public class BlockTracer {
-    public static void main(String[] args) {
-        System.out.println("Hello!");
+    public static void main(String[] args) throws Exception {
+        trace();
 
     }
 
     public static void trace() throws Exception {
-        // pass the path to the file as a parameter
-        File file = new File("test.txt");
+
+        File file = new File("src/app/sample1.c");
         Scanner sc = new Scanner(file);
 
         while (sc.hasNextLine())
