@@ -1,12 +1,15 @@
 {
 	"folders": [
 		{
-			"path": "HomeWork2"
-		},
-		{
+			"name": "HomeWork3",
 			"path": "HomeWork3"
 		},
 		{
+			"name": "HomeWork2",
+			"path": "HomeWork2"
+		},
+		{
+			"name": "HomeWork1",
 			"path": "HomeWork1"
 		}
 	],
