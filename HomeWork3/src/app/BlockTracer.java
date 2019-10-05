@@ -1,9 +1,12 @@
 package app;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.*;
 
 public class BlockTracer {
+    Stack<Block> stack = new Stack<Block>();
+    static String currentLine;
+
     public static void main(String[] args) throws Exception {
         trace();
 
@@ -14,8 +17,14 @@ public class BlockTracer {
         File file = new File("src/app/sample1.c");
         Scanner sc = new Scanner(file);
 
-        while (sc.hasNextLine())
-            System.out.println(sc.nextLine());
+        while (sc.hasNextLine()) {
+            currentLine = sc.nextLine();
+            for (int i = 0; i < currentLine.length(); i++) {
+                if (currentLine.charAt(i) == '}') {
+
+                }
+            }
+        }
         sc.close();
     }
 }
