@@ -32,7 +32,6 @@ public class BlockTracer {
                     newVariable(i);
                 }
                 if (currentLine.length() >= i + 8 && currentLine.substring(i, i + 8).equals("/*$print")) {
-                    System.err.println("attempting to print");
                     currentLine = currentLine.substring(i);
                     print();
                 }
@@ -49,10 +48,10 @@ public class BlockTracer {
             System.out.println("found local " + stack.peek().toString());
         } else {
             // if variable exists in first block
-            for (int i = 0; i < stack.size(); i++) {
-                if (stack.get(i).findVarialbe(trimmed[1]) != null) {
-                    System.out.println("FOUND: " + stack.get(i).findVarialbe(trimmed[1]).getName() + ":"
-                            + stack.get(i).findVarialbe(trimmed[1]).getIntegerValue());
+            for (int i = 0; i < getSize(); i++) {
+                if (getAt(i).findVarialbe(trimmed[1]) != null) {
+                    System.out.println("FOUND: " + getAt(i).findVarialbe(trimmed[1]).getName() + ":"
+                            + getAt(i).findVarialbe(trimmed[1]).getIntegerValue());
                     break;
                 }
             }
@@ -62,13 +61,25 @@ public class BlockTracer {
 
     public static Block getAt(int index) {
         Stack<Block> tempStack = new Stack<Block>();
-        while (!stack.empty()) {
-            tempStack.push(stack.pop());
+        Stack<Block> backup = (Stack<Block>) stack.clone()
+        Block temp = new Block();
+        while (!backup.empty()) {
+            tempStack.push(backup.pop());
         }
-        for (int i = 0; i < index - 1; i++) {
-            tempStack.pop();
+        for (int i = 0; i < index; i++) {
+            temp = tempStack.pop();
         }
-        return tempStack.pop();
+        return temp;
+    }
+
+    public static int getSize() {
+        Stack<Block> backup = (Stack<Block>) stack.clone();
+        int count = 0;
+        while (!backup.empty()) {
+            backup.pop();
+            count++;
+        }
+        return count;
     }
 
     public static void newVariable(int startingPoint) {
