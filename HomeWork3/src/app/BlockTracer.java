@@ -15,7 +15,7 @@ public class BlockTracer {
 
     public static void trace() throws Exception {
 
-        File file = new File("src/app/sample1.c");
+        File file = new File("src/app/sample2.c");
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             currentLine = sc.nextLine();
@@ -42,6 +42,7 @@ public class BlockTracer {
     }
 
     public static void print() {
+        currentLine = currentLine.substring(currentLine.indexOf("/*$"), currentLine.indexOf("*/"));
         currentLine = currentLine.replace("*/", "");
         currentLine = currentLine.replace("/*$", "");
         String[] trimmed = currentLine.split(" ");
@@ -60,26 +61,31 @@ public class BlockTracer {
 
     }
 
-    public static Block getAt(int index) {
-        Stack<Block> tempStack = new Stack<Block>();
-        Stack<Block> backup = (Stack<Block>) stack.clone();
-        while (!backup.empty()) {
-            tempStack.push(backup.pop());
-        }
-        for (int i = 0; i < index; i++) {
-            tempStack.pop();
-        }
-        return tempStack.pop();
-    }
     /*
      * public static Block getAt(int index) { Stack<Block> tempStack = new
-     * Stack<Block>(); Block[] backup = new Block[stackCount]; Block temp = new
-     * Block(); int j = 0; while (!stack.empty()) { backup[j] = stack.peek();
-     * tempStack.push(stack.pop()); j++; } for (int i = -1; i < index - 1; i++) {
-     * temp = tempStack.pop(); } for (int k = backup.length - 1; k >= 0; k--) {
-     * stack.push(backup[k]); // System.err.println("BACKUP: " + backup[k]); }
-     * return temp; }
+     * Stack<Block>(); Stack<Block> backup = (Stack<Block>) stack.clone(); while
+     * (!backup.empty()) { tempStack.push(backup.pop()); } for (int i = 0; i <
+     * index; i++) { tempStack.pop(); } return tempStack.pop(); }
      */
+
+    public static Block getAt(int index) {
+        Stack<Block> tempStack = new Stack<Block>();
+        Block[] backup = new Block[stackCount];
+        Block temp = new Block();
+        int j = 0;
+        while (!stack.empty()) {
+            backup[j] = stack.peek();
+            tempStack.push(stack.pop());
+            j++;
+        }
+        for (int i = 0; i < index + 1; i++) {
+            temp = tempStack.pop();
+        }
+        for (int k = backup.length - 1; k >= 0; k--) {
+            stack.push(backup[k]);
+        }
+        return temp;
+    }
 
     public static void newVariable(int startingPoint) {
         String name = "";
