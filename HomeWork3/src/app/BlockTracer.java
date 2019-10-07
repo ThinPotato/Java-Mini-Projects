@@ -6,6 +6,7 @@ import java.util.*;
 public class BlockTracer {
     static Stack<Block> stack = new Stack<Block>();
     static String currentLine;
+    static int stackCount;
 
     public static void main(String[] args) throws Exception {
         trace();
@@ -20,12 +21,12 @@ public class BlockTracer {
             currentLine = sc.nextLine();
             for (int i = 0; i < currentLine.length(); i++) {
                 if (currentLine.substring(i, i + 1).equals("{")) {
-                    System.err.println("new block made.");
                     stack.push(new Block());
+                    stackCount++;
                 }
                 if (currentLine.substring(i, i + 1).equals("}")) {
-                    System.err.println("stack popped.");
                     stack.pop();
+                    stackCount--;
                 }
                 if (currentLine.length() >= i + 4 && currentLine.substring(i, i + 4).equals("int ")) {
                     // TODO: create varialbe in highest block.
@@ -48,10 +49,10 @@ public class BlockTracer {
             System.out.println("found local " + stack.peek().toString());
         } else {
             // if variable exists in first block
-            for (int i = 0; i < getSize(); i++) {
+            for (int i = stackCount - 1; i >= 0; i--) {
                 if (getAt(i).findVarialbe(trimmed[1]) != null) {
                     System.out.println("FOUND: " + getAt(i).findVarialbe(trimmed[1]).getName() + ":"
-                            + getAt(i).findVarialbe(trimmed[1]).getIntegerValue());
+                            + getAt(i).findVarialbe(trimmed[1]).getIntegerValue() + " in stack " + i);
                     break;
                 }
             }
@@ -61,26 +62,24 @@ public class BlockTracer {
 
     public static Block getAt(int index) {
         Stack<Block> tempStack = new Stack<Block>();
-        Stack<Block> backup = (Stack<Block>) stack.clone()
-        Block temp = new Block();
+        Stack<Block> backup = (Stack<Block>) stack.clone();
         while (!backup.empty()) {
             tempStack.push(backup.pop());
         }
         for (int i = 0; i < index; i++) {
-            temp = tempStack.pop();
+            tempStack.pop();
         }
-        return temp;
+        return tempStack.pop();
     }
-
-    public static int getSize() {
-        Stack<Block> backup = (Stack<Block>) stack.clone();
-        int count = 0;
-        while (!backup.empty()) {
-            backup.pop();
-            count++;
-        }
-        return count;
-    }
+    /*
+     * public static Block getAt(int index) { Stack<Block> tempStack = new
+     * Stack<Block>(); Block[] backup = new Block[stackCount]; Block temp = new
+     * Block(); int j = 0; while (!stack.empty()) { backup[j] = stack.peek();
+     * tempStack.push(stack.pop()); j++; } for (int i = -1; i < index - 1; i++) {
+     * temp = tempStack.pop(); } for (int k = backup.length - 1; k >= 0; k--) {
+     * stack.push(backup[k]); // System.err.println("BACKUP: " + backup[k]); }
+     * return temp; }
+     */
 
     public static void newVariable(int startingPoint) {
         String name = "";

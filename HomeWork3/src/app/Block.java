@@ -44,7 +44,6 @@ class Block {
             if (variables[i] != null && variables[i].getName().equals(name)) {
                 return variables[i];
             }
-        System.out.println("could not find: " + name);
         return null;
     }
 
