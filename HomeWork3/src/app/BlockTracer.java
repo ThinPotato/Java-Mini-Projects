@@ -52,10 +52,10 @@ public class BlockTracer {
 
     public static void print() {
         currentLine = currentLine.substring(currentLine.indexOf("/*$") + 1, currentLine.indexOf("*/"));
-        // System.err.println("IMPORTANT: " + currentLine);
         currentLine = currentLine.replace("*/", "");
         currentLine = currentLine.replace("/*$", "");
         String[] trimmed = currentLine.split(" ");
+
         boolean found = false;
         if (trimmed[1].equals("LOCAL")) {
             if (stack.peek().toString() != "")
@@ -78,13 +78,6 @@ public class BlockTracer {
         }
 
     }
-
-    /*
-     * public static Block getAt(int index) { Stack<Block> tempStack = new
-     * Stack<Block>(); Stack<Block> backup = (Stack<Block>) stack.clone(); while
-     * (!backup.empty()) { tempStack.push(backup.pop()); } for (int i = 0; i <
-     * index; i++) { tempStack.pop(); } return tempStack.pop(); }
-     */
 
     /**
      * @return the block at location index in stack counting from bottom to top.
@@ -125,6 +118,12 @@ public class BlockTracer {
             trimmedLine = trimmedLine.substring(trimmedLine.indexOf("int") + 1);
             trimmedLine = currentLine.replace(",", " ,");
             trimmedLine = trimmedLine.replaceAll(";", " ;");
+            for (int k = 1; k < trimmedLine.length() - 1; k++) {
+                if (trimmedLine.substring(k, k + 1).equals("=") && (!trimmedLine.substring(k, k + 2).equals("= "))) {
+                    trimmedLine = trimmedLine.replace("=", " = ");
+                }
+
+            }
             trimmed = trimmedLine.split(" ");
 
             while (!trimmed[i].equals(";")) {
