@@ -1,3 +1,8 @@
+/**
+ * Variable
+ * 
+ * @author Bryce Stoker 111999983 R02 Bryce.stoker-schaeffer@stonybrook.edu a
+ */
 package app;
 
 class Variable {
@@ -8,6 +13,10 @@ class Variable {
 
     }
 
+    /**
+     * @param name         the name of the variable
+     * @param integerValue the integer data of the variable
+     */
     Variable(String name, int integerValue) {
         this.name = name;
         this.integerValue = integerValue;

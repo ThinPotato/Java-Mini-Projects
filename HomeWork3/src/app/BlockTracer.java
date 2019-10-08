@@ -1,3 +1,8 @@
+/**
+ * Main class
+ * 
+ * @author Bryce Stoker 111999983 R02 Bryce.stoker-schaeffer@stonybrook.edu
+ */
 package app;
 
 import java.io.File;
@@ -9,13 +14,18 @@ public class BlockTracer {
     static int stackCount;
 
     public static void main(String[] args) throws Exception {
-        trace();
+        String fileName = "";
+        Scanner scan = new Scanner(System.in);
+        System.out.println("enter name of file without filetype: ");
+        fileName = scan.nextLine();
+        trace(fileName);
 
     }
 
-    public static void trace() throws Exception {
+    public static void trace(String fileName) throws Exception {
+        System.out.println("Variable: Initial Value.");
 
-        File file = new File("src/app/sample2.c");
+        File file = new File("src/app/" + fileName + ".c");
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             currentLine = sc.nextLine();
@@ -29,7 +39,6 @@ public class BlockTracer {
                     stackCount--;
                 }
                 if (currentLine.length() >= i + 4 && currentLine.substring(i, i + 4).equals("int ")) {
-                    // TODO: create varialbe in highest block.
                     newVariable(i);
                 }
                 if (currentLine.length() >= i + 8 && currentLine.substring(i, i + 8).equals("/*$print")) {
@@ -42,21 +51,30 @@ public class BlockTracer {
     }
 
     public static void print() {
-        currentLine = currentLine.substring(currentLine.indexOf("/*$"), currentLine.indexOf("*/"));
+        currentLine = currentLine.substring(currentLine.indexOf("/*$") + 1, currentLine.indexOf("*/"));
+        // System.err.println("IMPORTANT: " + currentLine);
         currentLine = currentLine.replace("*/", "");
         currentLine = currentLine.replace("/*$", "");
         String[] trimmed = currentLine.split(" ");
+        boolean found = false;
         if (trimmed[1].equals("LOCAL")) {
-            System.out.println("found local " + stack.peek().toString());
+            if (stack.peek().toString() != "")
+                System.out.println("found locally: " + stack.peek().toString());
+            else
+                System.out.println("No local variables found.");
         } else {
             // if variable exists in first block
             for (int i = stackCount - 1; i >= 0; i--) {
                 if (getAt(i).findVarialbe(trimmed[1]) != null) {
-                    System.out.println("FOUND: " + getAt(i).findVarialbe(trimmed[1]).getName() + ":"
-                            + getAt(i).findVarialbe(trimmed[1]).getIntegerValue() + " in stack " + i);
+                    System.out.println(getAt(i).findVarialbe(trimmed[1]).getName() + ": "
+                            + getAt(i).findVarialbe(trimmed[1]).getIntegerValue());
+                    found = true;
                     break;
                 }
             }
+            if (found == false)
+                System.out.println("Could not find variable: " + trimmed[1]);
+            found = true;
         }
 
     }
@@ -68,6 +86,10 @@ public class BlockTracer {
      * index; i++) { tempStack.pop(); } return tempStack.pop(); }
      */
 
+    /**
+     * @return the block at location index in stack counting from bottom to top.
+     * @param index the location of the block in the stack
+     */
     public static Block getAt(int index) {
         Stack<Block> tempStack = new Stack<Block>();
         Block[] backup = new Block[stackCount];
@@ -87,6 +109,11 @@ public class BlockTracer {
         return temp;
     }
 
+    /**
+     * @param startingPoint used to declare where the new variable should be pulled
+     *                      from
+     * @throws IndexOutOfBoundsException
+     */
     public static void newVariable(int startingPoint) {
         String name = "";
         int value = 0;
@@ -95,6 +122,7 @@ public class BlockTracer {
         int i = 0;
         try {
             // add spaces after operators
+            trimmedLine = trimmedLine.substring(trimmedLine.indexOf("int") + 1);
             trimmedLine = currentLine.replace(",", " ,");
             trimmedLine = trimmedLine.replaceAll(";", " ;");
             trimmed = trimmedLine.split(" ");
@@ -111,7 +139,9 @@ public class BlockTracer {
                 i++;
             }
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (
+
+        IndexOutOfBoundsException e) {
             // TODO: handle exception
         }
     }

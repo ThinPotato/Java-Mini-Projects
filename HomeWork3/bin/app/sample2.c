@@ -9,8 +9,8 @@ main(void)
     while(numPhones >= 0)
     {
         int numPrinters = 15;
-	int i = 50;
-	int j = 60;
+	    int i = 50;
+	    int j = 60;
     /*$print LOCAL*/
 	if(numPrinters == 15)
 	{
