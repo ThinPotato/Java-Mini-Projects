@@ -2,9 +2,7 @@ package app;
 
 import java.util.Stack;
 
-import sun.invoke.empty.Empty;
-
-public class App {
+public class Rec5 {
     public static void main(String[] args) throws Exception {
 
     }
@@ -98,41 +96,20 @@ public class App {
     // differ from the usual ones and which are better for linked lists?
     // this method will not compile because it needs a whole linked list system
     // made. In theory it works, though
-
-    public void insert(Node t, int val){
-        if(t== null){
-            head = new Node(val);
-        }
-        else if(t.getNext() == null)){
-            t.setNext(new Node(val));
-        }
-        else
-            insert(t.getNext(), val);
-    }
-
-    public void remove(Node t, int val) {
-        if (t == null)
-            return;
-        else if (t.getData() == val) {
-            if (t.getPrev() == null && t.getNext() == null) {
-                head = tail = null;
-                return;
-            }
-            if (t.getPrev() != null)
-                t.getPrev().setNext(t.getNext());
-            if (t.getnext() != null)
-                t.getNext().setPrev(t.getPrev());
-            else
-                remove(t.getNext(), val);
-        }
-
-    }
-
-    public void get(Node t, int index) {
-        if (t == null)
-            throw Empty;
-        if (index == 0)
-            return t.getData();
-        return get(t.getNext(), index - 1);
-    }
+    /*
+     * public void insert(Node t, int val){ if(t== null){ head = new Node(val); }
+     * else if(t.getNext() == null)){ t.setNext(new Node(val)); } else
+     * insert(t.getNext(), val); }
+     * 
+     * public void remove(Node t, int val) { if (t == null) return; else if
+     * (t.getData() == val) { if (t.getPrev() == null && t.getNext() == null) { head
+     * = tail = null; return; } if (t.getPrev() != null)
+     * t.getPrev().setNext(t.getNext()); if (t.getnext() != null)
+     * t.getNext().setPrev(t.getPrev()); else remove(t.getNext(), val); }
+     * 
+     * }
+     * 
+     * public void get(Node t, int index) { if (t == null) throw Empty; if (index ==
+     * 0) return t.getData(); return get(t.getNext(), index - 1); }
+     */
 }
