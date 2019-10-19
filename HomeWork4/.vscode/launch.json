@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PlayfairEncryptionEngine",
+            "request": "launch",
+            "mainClass": "app.PlayfairEncryptionEngine",
+            "projectName": "HomeWork4"
+        }
+    ]
+}

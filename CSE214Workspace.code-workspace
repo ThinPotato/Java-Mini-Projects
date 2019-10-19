@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "HomeWork4",
+			"path": "HomeWork4"
+		},
+		{
 			"name": "HomeWork3",
 			"path": "HomeWork3"
 		},
@@ -13,6 +17,7 @@
 			"path": "HomeWork1"
 		},
 		{
+			"name": "Recitation",
 			"path": "Recitation"
 		}
 	],
