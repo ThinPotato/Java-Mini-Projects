@@ -13,7 +13,7 @@ public class Bigram {
 
     @Override
     public String toString() {
-        // TODO: a lot;
+        return first + " " + second;
     }
 
     /**

@@ -3,9 +3,14 @@ package app;
 /**
  * Phrase
  */
-public class Phrase implements Queue {
+
+class Phrase implements Queue<Bigram> {
 
     public Phrase() {
+
+    }
+
+    public static Phrase buildPhraseFromString(String s) {
 
     }
 

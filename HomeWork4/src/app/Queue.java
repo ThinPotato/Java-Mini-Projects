@@ -1,27 +1,21 @@
 package app;
 
+import java.util.LinkedList;
+
 /**
  * Queue
  */
 public interface Queue {
 
-    public void enqueue(Bigram b) {
-        
-    }
+    Queue<String> queue = new LinkedList<String>();
 
-    public Bigram dequeue() {
-        
-    }
+    public void enqueue(Bigram b);
 
-    public Bigram peek() {
-        
-    }
+    public Bigram dequeue();
 
-    public int size() {
-        
-    }
+    public Bigram peek();
 
-    public boolean isEmpty() {
-        
-    }
+    public int size();
+
+    public boolean isEmpty();
 }

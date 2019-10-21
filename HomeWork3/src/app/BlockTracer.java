@@ -19,7 +19,7 @@ public class BlockTracer {
         System.out.println("enter name of file without filetype: ");
         fileName = scan.nextLine();
         trace(fileName);
-
+        scan.close();
     }
 
     public static void trace(String fileName) throws Exception {
@@ -141,7 +141,6 @@ public class BlockTracer {
         } catch (
 
         IndexOutOfBoundsException e) {
-            // TODO: handle exception
         }
     }
 }
