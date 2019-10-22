@@ -27,8 +27,10 @@ public class PlayfairEncryptionEngine {
                 encrypted = phrase.encrypt(keyTable);
                 System.out.println("encrypted text is: " + encrypted.toString());
             } else if (in.equalsIgnoreCase("DE")) {
-                System.err.println("SIZE: " + encrypted.size());
-                System.out.println("decrypted text is: " + encrypted.decrypt(keyTable).toString());
+                System.out.println("Please enter a phrase to decrypt: ");
+                phrase = Phrase.buildPhraseFromStringForEncryption(scan.nextLine().replaceAll("[^a-zA-Z]", ""));
+
+                System.out.println("decrypted text is: " + phrase.decrypt(keyTable).toString());
             }
         } while (!in.equalsIgnoreCase("q"));
         scan.close();
