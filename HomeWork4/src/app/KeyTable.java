@@ -10,6 +10,10 @@ public class KeyTable {
 
     }
 
+    /**
+     * @return
+     * @param phrase the phrase to be used
+     */
     public static KeyTable buildFromString(String phrase) {
         int tempInt = 0;
         KeyTable keyTable = new KeyTable();
@@ -39,10 +43,17 @@ public class KeyTable {
         return keyTable;
     }
 
+    /**
+     * @return the 2d array keytable data
+     */
     public char[][] getKeyTable() {
         return key;
     }
 
+    /**
+     * @return the row of c
+     * @param c the character to search for
+     */
     public int findRow(char c) {
         for (int i = 0; i < key.length; i++) {
             for (int j = 0; j < key[i].length; j++) {
@@ -54,6 +65,10 @@ public class KeyTable {
         return -1;
     }
 
+    /**
+     * @return the column of c
+     * @param c the character to search for
+     */
     public int findCol(char c) {
         for (int i = 0; i < key.length; i++) {
             for (int j = 0; j < key[i].length; j++) {
@@ -65,6 +80,9 @@ public class KeyTable {
         return -1;
     }
 
+    /**
+     * @return the bigrams as first second
+     */
     public String toString() {
         String temp = "";
         for (int i = 0; i < key.length; i++) {

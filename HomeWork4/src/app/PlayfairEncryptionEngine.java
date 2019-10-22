@@ -23,7 +23,7 @@ public class PlayfairEncryptionEngine {
 
             } else if (in.equalsIgnoreCase("EN")) {
                 System.out.println("Plese enter a phrase to encrypt: ");
-                phrase = Phrase.buildPhraseFromString(scan.nextLine().replaceAll("[0-9]", ""));
+                phrase = Phrase.buildPhraseFromStringForEncryption(scan.nextLine().replaceAll("[0-9]", ""));
                 encrypted = phrase.encrypt(keyTable);
                 System.out.println("encrypted text is: " + encrypted.toString());
             } else if (in.equalsIgnoreCase("DE")) {

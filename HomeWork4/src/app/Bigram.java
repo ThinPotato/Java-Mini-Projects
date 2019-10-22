@@ -16,6 +16,9 @@ public class Bigram {
         this.second = second;
     }
 
+    /**
+     * @return bigrams formatted as first letter Second Letter
+     */
     @Override
     public String toString() {
         return first + " " + second;

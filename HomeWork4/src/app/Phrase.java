@@ -13,7 +13,11 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
 
     }
 
-    public static Phrase buildPhraseFromString(String s) {
+    /**
+     * @return the phrase built from the string
+     * @param s the string to build the phrase from
+     */
+    public static Phrase buildPhraseFromStringForEncryption(String s) {
         Phrase temp = new Phrase();
         s = s.replaceAll(" ", "");
         s = s.toUpperCase();
@@ -34,6 +38,10 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
         return temp;
     }
 
+    /**
+     * @return the encrypted phrase
+     * @param key the keytable to be used
+     */
     public Phrase encrypt(KeyTable key) {
         char newFirst;
         char newSecond;
@@ -91,6 +99,10 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
         return newPhrase;
     }
 
+    /**
+     * @return the decypted phrase
+     * @param key the keytable to be used
+     */
     public Phrase decrypt(KeyTable key) {
         char newFirst;
         char newSecond;
@@ -150,6 +162,9 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
         return newPhrase;
     }
 
+    /**
+     * @return the phrase converted to a string
+     */
     public String toString() {
         String temp = "";
         int size = this.size();
