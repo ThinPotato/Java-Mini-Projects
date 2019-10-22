@@ -29,10 +29,10 @@ public class KeyTable {
             }
         }
 
-        for (int i = 0; i < keyTable.getKey().length; i++) {
-            for (int j = 0; j < keyTable.getKey()[i].length; j++) {
+        for (int i = 0; i < keyTable.getKeyTable().length; i++) {
+            for (int j = 0; j < keyTable.getKeyTable()[i].length; j++) {
 
-                keyTable.getKey()[i][j] = phrase.charAt(tempInt);
+                keyTable.getKeyTable()[i][j] = phrase.charAt(tempInt);
                 tempInt++;
             }
         }
@@ -81,12 +81,5 @@ public class KeyTable {
      */
     public void setKey(char[][] key) {
         this.key = key;
-    }
-
-    /**
-     * @return the key
-     */
-    public char[][] getKey() {
-        return key;
     }
 }

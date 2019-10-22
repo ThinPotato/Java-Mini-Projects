@@ -3,11 +3,13 @@ package app;
 import java.util.Scanner;
 
 public class PlayfairEncryptionEngine {
+    static Phrase phrase = new Phrase();
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String in = "";
         System.out.println("Enter key phrase: ");
-        KeyTable.buildFromString(scan.nextLine());
+        KeyTable keyTable = KeyTable.buildFromString(scan.nextLine());
 
         do {
             printMenu();
@@ -18,7 +20,9 @@ public class PlayfairEncryptionEngine {
                 System.out.println("Hello");
 
             } else if (in.equalsIgnoreCase("EN")) {
-
+                System.out.println("Plese enter a phrase to encrypt: ");
+                phrase = Phrase.buildPhraseFromString(scan.nextLine());
+                phrase.encrypt(keyTable);
             } else if (in.equalsIgnoreCase("DE")) {
 
             }

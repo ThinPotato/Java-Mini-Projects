@@ -11,6 +11,11 @@ public class Bigram {
 
     }
 
+    public Bigram(char first, char second) {
+        this.first = first;
+        this.second = second;
+    }
+
     @Override
     public String toString() {
         return first + " " + second;
@@ -28,5 +33,19 @@ public class Bigram {
      */
     public char getSecond() {
         return second;
+    }
+
+    /**
+     * @param first the first to set
+     */
+    public void setFirst(char first) {
+        this.first = first;
+    }
+
+    /**
+     * @param second the second to set
+     */
+    public void setSecond(char second) {
+        this.second = second;
     }
 }
