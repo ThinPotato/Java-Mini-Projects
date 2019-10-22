@@ -1,3 +1,8 @@
+/**
+ * Block
+ * 
+ * @author Bryce Stoker 111999983 R02 Bryce.stoker-schaeffer@stonybrook.edu a
+ */
 package app;
 
 /**
