@@ -22,13 +22,12 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
         s = s.replaceAll(" ", "");
         s = s.toUpperCase();
         s = s.replaceAll("J", "I");
-        for (int i = 0; i < s.length() - 2; i++) {
+        for (int i = 0; i < s.length() - 2; i += 2) {
             String c1 = s.substring(i, i + 1);
             String c2 = s.substring(i + 1, i + 2);
-            if (s.substring(i, i + 1).equals(s.substring(i + 1, i + 2)) && (i) % 2 == 0) {
+            if (s.substring(i, i + 2).equals(s.substring(i + 1, i + 2)) && (i) % 2 == 0) {
                 s = s.substring(0, i + 1) + "X" + s.substring(i + 1, s.length());
             }
-            System.err.println(c1 + " " + c2);
         }
         String[] sArray = (s.split("(?<=\\G..)"));
         for (int i = 0; i < sArray.length; i++) {
