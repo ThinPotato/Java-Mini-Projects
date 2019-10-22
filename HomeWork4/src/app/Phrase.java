@@ -22,10 +22,13 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
         s = s.replaceAll(" ", "");
         s = s.toUpperCase();
         s = s.replaceAll("J", "I");
-        for (int i = 0 + 1; i < s.length() - 2; i++) {
-            if (s.substring(i, i + 1).equals(s.substring(i + 1, i + 2))) {
+        for (int i = 0; i < s.length() - 2; i++) {
+            String c1 = s.substring(i, i + 1);
+            String c2 = s.substring(i + 1, i + 2);
+            if (s.substring(i, i + 1).equals(s.substring(i + 1, i + 2)) && (i) % 2 == 0) {
                 s = s.substring(0, i + 1) + "X" + s.substring(i + 1, s.length());
             }
+            System.err.println(c1 + " " + c2);
         }
         String[] sArray = (s.split("(?<=\\G..)"));
         for (int i = 0; i < sArray.length; i++) {
@@ -55,38 +58,38 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
                 current = PlayfairEncryptionEngine.phrase.pop();
                 char first = current.getFirst();
                 char second = current.getSecond();
-                y1 = key.findCol(first);
-                y2 = key.findCol(second);
-                x1 = key.findRow(first);
-                x2 = key.findRow(second);
+                x1 = key.findCol(first);
+                x2 = key.findCol(second);
+                y1 = key.findRow(first);
+                y2 = key.findRow(second);
                 // first case they are both in the same row
                 if (y1 == y2) {
-                    if (x1 == key.getKeyTable().length) {
+                    if (x1 == key.getKeyTable().length - 1) {
                         newFirst = key.getKeyTable()[y1][0];
                     } else {
                         newFirst = key.getKeyTable()[y1][x1 + 1];
                     }
-                    if (x2 == key.getKeyTable().length) {
+                    if (x2 == key.getKeyTable().length - 1) {
                         newSecond = key.getKeyTable()[y2][0];
                     } else {
                         newSecond = key.getKeyTable()[y2][x2 + 1];
                     }
                     newPhrase.add(new Bigram(newFirst, newSecond));
                 } else if (x1 == x2) {
-                    if (y1 == key.getKeyTable().length) {
+                    if (y1 == key.getKeyTable().length - 1) {
                         newFirst = key.getKeyTable()[0][x1];
                     } else {
                         newFirst = key.getKeyTable()[y1 + 1][x1];
                     }
 
-                    if (x2 == key.getKeyTable().length) {
+                    if (x2 == key.getKeyTable().length - 1) {
                         newSecond = key.getKeyTable()[0][x2];
                     } else {
                         newSecond = key.getKeyTable()[y2 + 1][x2];
                     }
                     newPhrase.add(new Bigram(newFirst, newSecond));
                 } else {
-                    if (y1 > y2) {
+                    if (y1 < y2) {
                         newSecond = key.getKeyTable()[y1 - (y1 - y2)][x1];
                         newFirst = key.getKeyTable()[y2 + (y1 - y2)][x2];
                     } else {
@@ -120,18 +123,18 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
                 current = PlayfairEncryptionEngine.encrypted.pop();
                 char first = current.getFirst();
                 char second = current.getSecond();
-                y1 = key.findCol(first);
-                y2 = key.findCol(second);
-                x1 = key.findRow(first);
-                x2 = key.findRow(second);
+                x1 = key.findCol(first);
+                x2 = key.findCol(second);
+                y1 = key.findRow(first);
+                y2 = key.findRow(second);
                 // first case they are both in the same row
                 if (y1 == y2) {
-                    if (x1 == key.getKeyTable().length) {
+                    if (x1 == key.getKeyTable().length - 1) {
                         newFirst = key.getKeyTable()[y1][0];
                     } else {
                         newFirst = key.getKeyTable()[y1][x1 - 1];
                     }
-                    if (x2 == key.getKeyTable().length) {
+                    if (x2 == key.getKeyTable().length - 1) {
                         newSecond = key.getKeyTable()[y2][0];
                     } else {
                         newSecond = key.getKeyTable()[y2][x2 - 1];
@@ -139,13 +142,13 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
                     newPhrase.add(new Bigram(newFirst, newSecond));
                 } else if (x1 == x2) {
                     System.err.println("called 2");
-                    if (y1 == key.getKeyTable().length) {
+                    if (y1 == key.getKeyTable().length - 1) {
                         newFirst = key.getKeyTable()[0][x1];
                     } else {
                         newFirst = key.getKeyTable()[y1 - 1][x1];
                     }
 
-                    if (x2 == key.getKeyTable().length) {
+                    if (x2 == key.getKeyTable().length - 1) {
                         newSecond = key.getKeyTable()[0][x2];
                     } else {
                         newSecond = key.getKeyTable()[y2 - 1][x2];

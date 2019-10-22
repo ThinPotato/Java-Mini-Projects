@@ -63,7 +63,7 @@ public class KeyTable {
             for (int i = 0; i < key.length; i++) {
                 for (int j = 0; j < key[i].length; j++) {
                     if (key[i][j] == c) {
-                        return j;
+                        return i;
                     }
                 }
             }
@@ -82,7 +82,7 @@ public class KeyTable {
             for (int i = 0; i < key.length; i++) {
                 for (int j = 0; j < key[i].length; j++) {
                     if (key[i][j] == c) {
-                        return i;
+                        return j;
                     }
                 }
             }
