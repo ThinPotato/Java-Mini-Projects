@@ -20,25 +20,29 @@ public class KeyTable {
         phrase = phrase.replaceAll(" ", "");
         phrase = phrase.toUpperCase();
         char[] alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ".toCharArray();
-        for (int i = 0; i < phrase.length(); i++) {
-            for (int j = 0; j < phrase.length(); j++) {
-                if (phrase.charAt(i) == phrase.charAt(j) && i != j) {
-                    phrase = phrase.replaceFirst("(?s)(.*)" + Character.toString(phrase.charAt(i)), "$1" + "");
+        try {
+            for (int i = 0; i < phrase.length(); i++) {
+                for (int j = 0; j < phrase.length(); j++) {
+                    if (phrase.charAt(i) == phrase.charAt(j) && i != j) {
+                        phrase = phrase.replaceFirst("(?s)(.*)" + Character.toString(phrase.charAt(i)), "$1" + "");
+                    }
                 }
             }
-        }
-        for (int i = 0; i < alphabet.length; i++) {
-            if (!phrase.contains(Character.toString(alphabet[i]))) {
-                phrase += alphabet[i];
+            for (int i = 0; i < alphabet.length; i++) {
+                if (!phrase.contains(Character.toString(alphabet[i]))) {
+                    phrase += alphabet[i];
+                }
             }
-        }
 
-        for (int i = 0; i < keyTable.getKeyTable().length; i++) {
-            for (int j = 0; j < keyTable.getKeyTable()[i].length; j++) {
+            for (int i = 0; i < keyTable.getKeyTable().length; i++) {
+                for (int j = 0; j < keyTable.getKeyTable()[i].length; j++) {
 
-                keyTable.getKeyTable()[i][j] = phrase.charAt(tempInt);
-                tempInt++;
+                    keyTable.getKeyTable()[i][j] = phrase.charAt(tempInt);
+                    tempInt++;
+                }
             }
+        } catch (IllegalArgumentException e) {
+            System.err.println("error: Illegal Argument Exception");
         }
         return keyTable;
     }
@@ -55,12 +59,16 @@ public class KeyTable {
      * @param c the character to search for
      */
     public int findRow(char c) {
-        for (int i = 0; i < key.length; i++) {
-            for (int j = 0; j < key[i].length; j++) {
-                if (key[i][j] == c) {
-                    return j;
+        try {
+            for (int i = 0; i < key.length; i++) {
+                for (int j = 0; j < key[i].length; j++) {
+                    if (key[i][j] == c) {
+                        return j;
+                    }
                 }
             }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: Illegal Argument Exception");
         }
         return -1;
     }
@@ -70,12 +78,16 @@ public class KeyTable {
      * @param c the character to search for
      */
     public int findCol(char c) {
-        for (int i = 0; i < key.length; i++) {
-            for (int j = 0; j < key[i].length; j++) {
-                if (key[i][j] == c) {
-                    return i;
+        try {
+            for (int i = 0; i < key.length; i++) {
+                for (int j = 0; j < key[i].length; j++) {
+                    if (key[i][j] == c) {
+                        return i;
+                    }
                 }
             }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: Illegal Argument Exception");
         }
         return -1;
     }
