@@ -140,7 +140,6 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
                     }
                     newPhrase.add(new Bigram(newFirst, newSecond));
                 } else if (x1 == x2) {
-                    System.err.println("called 2");
                     if (y1 == key.getKeyTable().length) {
                         newFirst = key.getKeyTable()[0][x1];
                     } else {
@@ -154,7 +153,6 @@ class Phrase extends LinkedList<Bigram> implements Queue<Bigram> {
                     }
                     newPhrase.add(new Bigram(newFirst, newSecond));
                 } else {
-                    System.err.println("called 3");
                     if (y1 > y2) {
                         newSecond = key.getKeyTable()[y1 - (y1 - y2)][x1];
                         newFirst = key.getKeyTable()[y2 + (y1 - y2)][x2];
