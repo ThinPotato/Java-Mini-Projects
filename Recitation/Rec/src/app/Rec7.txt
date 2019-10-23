@@ -1,0 +1,46 @@
+package app;
+
+/**
+ * Rec7
+ */
+public class Rec7 {
+
+    public static void main(String[] args) {
+
+    }
+
+    public void printPreOrder(Node root) {
+        System.out.println(root.getValue());
+        if (root.getLeft() != null) {
+            printPreOrder(root.getLeft());
+        }
+        if (root.getRight() != null) {
+            printPreOrder(root.getRight());
+        }
+    }
+
+    public void PrintInOrder(Node root) {
+        if (root.getleft() != null) {
+            PrintInOrder(root.getLeft());
+        }
+        System.out.println(root.getValue());
+        if (root.getRight() != null) {
+            PrintInOrder(root.getRight());
+        }
+    }
+
+    public void PrintPostOrder(Node root) {
+        // left
+        if (root.getleft() != null) {
+            PrintInOrder(root.getLeft());
+        }
+        // right
+        if (root.getRight() != null) {
+            PrintInOrder(root.getRight());
+        }
+        // root
+        System.out.println(root.getValue());
+
+    }
+
+}
