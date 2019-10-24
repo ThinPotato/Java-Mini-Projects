@@ -16,6 +16,10 @@ public class OrganismNode {
 
     }
 
+    OrganismNode(String name) {
+        this.name = name;
+    }
+
     /**
      * @return the name
      */
