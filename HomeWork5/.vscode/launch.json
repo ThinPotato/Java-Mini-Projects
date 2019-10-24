@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FoodPyramid",
+            "request": "launch",
+            "mainClass": "app.FoodPyramid",
+            "projectName": "HomeWork5"
+        }
+    ]
+}
