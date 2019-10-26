@@ -49,6 +49,27 @@ public class OrganismNode {
     }
 
     /**
+     * @param left the left to set
+     */
+    public void setLeft(OrganismNode left) {
+        this.left = left;
+    }
+
+    /**
+     * @param middle the middle to set
+     */
+    public void setMiddle(OrganismNode middle) {
+        this.middle = middle;
+    }
+
+    /**
+     * @param right the right to set
+     */
+    public void setRight(OrganismNode right) {
+        this.right = right;
+    }
+
+    /**
      * @return the left
      */
     public OrganismNode getLeft() {
@@ -67,6 +88,27 @@ public class OrganismNode {
      */
     public OrganismNode getRight() {
         return right;
+    }
+
+    /**
+     * @param isCarnivore the isCarnivore to set
+     */
+    public void setCarnivore(boolean isCarnivore) {
+        this.isCarnivore = isCarnivore;
+    }
+
+    /**
+     * @param isHerbivore the isHerbivore to set
+     */
+    public void setHerbivore(boolean isHerbivore) {
+        this.isHerbivore = isHerbivore;
+    }
+
+    /**
+     * @param isPlant the isPlant to set
+     */
+    public void setPlant(boolean isPlant) {
+        this.isPlant = isPlant;
     }
 
     /**
