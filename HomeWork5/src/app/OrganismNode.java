@@ -8,9 +8,9 @@ public class OrganismNode {
     boolean isPlant;
     boolean isHerbivore;
     boolean isCarnivore;
-    OrganismNode left = new OrganismNode();
-    OrganismNode right = new OrganismNode();
-    OrganismNode middle = new OrganismNode();
+    OrganismNode left;
+    OrganismNode right;
+    OrganismNode middle;
 
     OrganismNode() {
 
