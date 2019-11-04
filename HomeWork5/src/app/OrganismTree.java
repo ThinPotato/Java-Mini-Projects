@@ -39,7 +39,21 @@ public class OrganismTree {
     }
 
     public String listFoodChain() {
-
+        String temp = "";
+        OrganismNode save = cursor;
+        cursor = root;
+        do {
+            if (cursor.getLeft() != null)
+                cursor = cursor.getLeft();
+            else if (cursor.getMiddle() != null)
+                cursor = cursor.getMiddle();
+            else if (cursor.getRight() != null)
+                cursor = cursor.getRight();
+            temp += cursor.getName() + " -> ";
+        } while (!cursor.getName().equals(save.getName()));
+        temp += cursor.getName();
+        cursor = save;
+        return temp;
     }
 
     public void printOrganismTree() {

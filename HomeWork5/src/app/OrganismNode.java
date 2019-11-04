@@ -116,6 +116,12 @@ public class OrganismNode {
      */
     public void addPrey(OrganismNode preyNode)
             throws PositionNotAvailableException, IsPlantException, DietMismatchException {
-
+        if (!left.name.equals("")) {
+            left = preyNode;
+        } else if (!middle.name.equals("")) {
+            middle = preyNode;
+        } else if (!right.name.equals("")) {
+            right = preyNode;
+        }
     }
 }

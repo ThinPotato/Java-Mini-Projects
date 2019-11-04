@@ -3,7 +3,7 @@ package app;
 import java.util.Scanner;
 
 public class FoodPyramid {
-    static private OrganismTree tree;
+    private static OrganismTree tree;
 
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
