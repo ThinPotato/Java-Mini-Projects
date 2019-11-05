@@ -30,11 +30,11 @@ public class OrganismTree {
      */
     public void moveCursor(String name) throws IllegalArgumentException {
         try {
-            if (cursor.getLeft().getName().equalsIgnoreCase(name))
+            if (cursor.getLeft() != null && cursor.getLeft().getName().equalsIgnoreCase(name))
                 cursor = cursor.getLeft();
-            else if (cursor.getMiddle().getName().equalsIgnoreCase(name))
+            else if (cursor.getLeft() != null && cursor.getMiddle().getName().equalsIgnoreCase(name))
                 cursor = cursor.getMiddle();
-            else if (cursor.getRight().getName().equalsIgnoreCase(name))
+            else if (cursor.getLeft() != null && cursor.getRight().getName().equalsIgnoreCase(name))
                 cursor = cursor.getRight();
             else
                 System.err.println("Error: Node not found");
