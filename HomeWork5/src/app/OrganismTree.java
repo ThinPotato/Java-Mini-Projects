@@ -36,6 +36,8 @@ public class OrganismTree {
                 cursor = cursor.getMiddle();
             else if (cursor.getRight().getName().equalsIgnoreCase(name))
                 cursor = cursor.getRight();
+            else
+                System.err.println("Error: Node not found");
         } catch (IllegalArgumentException e) {
             System.err.println("Error, IllegalArgumentException");
         }
@@ -130,7 +132,6 @@ public class OrganismTree {
     }
 
     private void organizePlants(OrganismNode temp) {
-        // TODO: this may not connect to listAllPlants() properly
         if (temp.getLeft() != null)
             organizePlants(temp.getLeft());
         if (temp.getMiddle() != null)
@@ -220,11 +221,11 @@ public class OrganismTree {
      */
     public void removeChild(String name) throws IllegalArgumentException {
         try {
-            if (cursor.getLeft().getName().equals(name))
+            if (cursor.getLeft().getName().equalsIgnoreCase(name))
                 cursor.setLeft(null);
-            else if (cursor.getMiddle().getName().equals(name))
+            else if (cursor.getMiddle().getName().equalsIgnoreCase(name))
                 cursor.setMiddle(null);
-            else if (cursor.getRight().getName().equals(name))
+            else if (cursor.getRight().getName().equalsIgnoreCase(name))
                 cursor.setRight(null);
             size--;
         } catch (IllegalArgumentException e) {
