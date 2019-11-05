@@ -39,27 +39,20 @@ public class OrganismTree {
     }
 
     public String listFoodChain() {
-        String temp = "";
-        OrganismNode save = cursor;
-        cursor = root;
-        do {
-            if (cursor.getLeft() != null)
-                cursor = cursor.getLeft();
-            else if (cursor.getMiddle() != null)
-                cursor = cursor.getMiddle();
-            else if (cursor.getRight() != null)
-                cursor = cursor.getRight();
-            temp += cursor.getName() + " -> ";
-        } while (!cursor.getName().equals(save.getName()));
-        temp += cursor.getName();
-        cursor = save;
-        return temp;
+        proccessString = "";
+        traverseTree(root);
+        String[] temp = proccessString.split("-");
+        proccessString = "";
+        for (int i = 1; i < temp.length; i += 2) {
+            proccessString += temp[i] + "<- ";
+        }
+        return proccessString;
     }
 
     public void printOrganismTree() {
         OrganismNode save = cursor;
         proccessString = "";
-        traverseTree(save);
+        organizeTree(save, 0);
         System.out.println(proccessString);
     }
 
@@ -71,14 +64,31 @@ public class OrganismTree {
         return proccessString;
     }
 
+    private void organizeTree(OrganismNode temp, int i) {
+        i += 4;
+        for (int k = 0; k < i; k++) {
+            proccessString += " ";
+        }
+        if (temp.isPlant) {
+            proccessString += "-" + temp.getName() + "\n";
+        } else
+            proccessString += "|-" + temp.getName() + "\n";
+        if (temp.getLeft() != null)
+            organizeTree(temp.getLeft(), i);
+        if (temp.getMiddle() != null)
+            organizeTree(temp.getMiddle(), i);
+        if (temp.getRight() != null)
+            organizeTree(temp.getRight(), i);
+    }
+
     private void traverseTree(OrganismNode temp) {
         if (temp.getLeft() != null)
             traverseTree(temp.getLeft());
-        proccessString += temp.getName() + "-";
         if (temp.getMiddle() != null)
             traverseTree(temp.getMiddle());
         if (temp.getRight() != null)
             traverseTree(temp.getRight());
+        proccessString += temp.getName() + "-";
     }
 
     private void organizePlants(OrganismNode temp) {

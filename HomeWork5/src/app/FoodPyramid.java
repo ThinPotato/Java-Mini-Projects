@@ -48,7 +48,7 @@ public class FoodPyramid {
                 System.out.println(tree.listPrey());
             } else if (in.equalsIgnoreCase("C")) {
                 // TODO: Print out food chain
-                tree.listFoodChain();
+                System.out.println(tree.listFoodChain());
             } else if (in.equalsIgnoreCase("F")) {
                 // TODO: Print out food pyramid at cursor
                 tree.printOrganismTree();
@@ -59,6 +59,7 @@ public class FoodPyramid {
             } else if (in.equalsIgnoreCase("R")) {
                 // TODO: reset cursor to root
                 tree.cursorReset();
+                System.out.println("Cursor successfully reset to root!");
             } else if (in.equalsIgnoreCase("M")) {
                 // TODO: Move cursor to child
                 System.out.println("Which child should the cursor be moved to?: ");
