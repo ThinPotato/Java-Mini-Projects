@@ -112,6 +112,8 @@ public class OrganismNode {
     }
 
     /**
+     * Adds preyNode as prey to this node.
+     * 
      * @param preyNode the node to add
      */
     public void addPrey(OrganismNode preyNode)

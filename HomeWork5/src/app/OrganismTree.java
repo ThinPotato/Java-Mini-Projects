@@ -14,19 +14,40 @@ public class OrganismTree {
         cursor = root;
     }
 
+    /**
+     * resets the cursor to the root position
+     */
     public void cursorReset() {
         cursor = root;
     }
 
+    /**
+     * Moves cursor to one of cursor’s children.
+     * 
+     * @param name The name of the node to be moved to.
+     * @throws IllegalArgumentException: Thrown if name does not reference a direct,
+     *                                   valid child of cursor.
+     */
     public void moveCursor(String name) throws IllegalArgumentException {
-        if (cursor.getLeft().getName().equals(name))
-            cursor = cursor.getLeft();
-        else if (cursor.getMiddle().getName().equals(name))
-            cursor = cursor.getMiddle();
-        else if (cursor.getRight().getName().equals(name))
-            cursor = cursor.getRight();
+        try {
+            if (cursor.getLeft().getName().equals(name))
+                cursor = cursor.getLeft();
+            else if (cursor.getMiddle().getName().equals(name))
+                cursor = cursor.getMiddle();
+            else if (cursor.getRight().getName().equals(name))
+                cursor = cursor.getRight();
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error, IllegalArgumentException");
+        }
     }
 
+    /**
+     * 
+     * @return a String including the organism at cursor and all its possible prey
+     *         (i.e. in the case of if cursor was at the root of the tree in the
+     *         diagram above: bald eagle -> python, carp, raccoon).
+     * @throws IsPlantException
+     */
     public String listPrey() throws IsPlantException {
         String temp = cursor.getName() + " - > ";
         if (cursor.getLeft() != null)
@@ -38,10 +59,19 @@ public class OrganismTree {
         return temp;
     }
 
+    /**
+     * 
+     * @return a String containing the path of organisms that leads from the apex
+     *         predator (root) to the organism at cursor. (i.e. in the case of if
+     *         cursor was at “seeds” in the diagram above: bald eagle -> python ->
+     *         mallard duck -> seeds)
+     * 
+     */
     public String listFoodChain() {
+        // TODO: redo this method
         proccessString = "";
-        traverseTree(root);
-        String[] temp = proccessString.split("-");
+        test(root, 0);
+        String[] temp = proccessString.split(", ");
         proccessString = "";
         for (int i = 1; i < temp.length; i += 2) {
             proccessString += temp[i] + "<- ";
@@ -49,6 +79,11 @@ public class OrganismTree {
         return proccessString;
     }
 
+    /**
+     * Prints out a layered, indented tree by performing a preorder traversal
+     * starting at cursor. The cursor should act as the “root” of the printed tree,
+     * per se, but the root reference does not move.
+     */
     public void printOrganismTree() {
         OrganismNode save = cursor;
         proccessString = "";
@@ -56,6 +91,10 @@ public class OrganismTree {
         System.out.println(proccessString);
     }
 
+    /**
+     * 
+     * @return A String containing a list of all the plants in the food pyramid.
+     */
     public String listAllPlants() {
         // TODO: redo this method
         proccessString = "";
@@ -91,6 +130,18 @@ public class OrganismTree {
         proccessString += temp.getName() + "-";
     }
 
+    private boolean test(OrganismNode temp, int i) {
+        proccessString += root.getName() + ", ";
+
+        if (test(root.getLeft(), i) || test(root.getMiddle(), i) || test(root.getRight(), i))
+            return true;
+        proccessString = proccessString.substring(0, i - 2);
+        String[] t = proccessString.split(", ");
+        t[i] = "";
+        proccessString = t.toString();
+        return false;
+    }
+
     private void organizePlants(OrganismNode temp) {
         // TODO: this may not connect to listAllPlants() properly
         if (temp.getLeft() != null)
@@ -104,6 +155,19 @@ public class OrganismTree {
         }
     }
 
+    /**
+     * Creates a new animal node with a specific name and diet and adds it as a
+     * child of the cursor node.
+     * 
+     * @param name        The name of the child node.
+     * @param isHerbivore value depending on whether the animal consumes plants.
+     * @param isCarnivore value depending on whether the animal consumes other
+     *                    animals.
+     * @throws IllegalArgumentException      Thrown if name references an exact name
+     *                                       with one of its would-be siblings.
+     * @throws PositionNotAvailableExceptoin Thrown if there is no available child
+     *                                       position for a new node to be added.
+     */
     public void addAnimalChild(String name, boolean isHerbivore, boolean isCarnivore)
             throws IllegalArgumentException, PositionNotAvailableExceptoin {
         try {
@@ -118,12 +182,26 @@ public class OrganismTree {
                 cursor.setRight(temp);
             size++;
         } catch (Exception e) {
-            // TODO: handle exception
+            if (e instanceof IllegalArgumentException)
+                System.err.println("Error, Illegal Argument exception");
+            else
+                System.err.println("Error, Position Not Avilable Exception");
         }
 
     }
 
-    public void addPlantChild(String name) throws IllegalArgumentException, PositionNotAvailableExceptoin {
+    /**
+     * Creates a new plant node with a specific name and adds it as a child of the
+     * cursor node.
+     * 
+     * @param name The name of the child node.
+     * 
+     * @throws IllegalArgumentException      Thrown if name references an exact name
+     *                                       with one of its would-be siblings.
+     * @throws PositionNotAvailableExceptoin Thrown if there is no available child
+     *                                       position for a new node to be added.
+     */
+    public void addPlantChild(String name) throws IllegalArgumentException, PositionNotAvailableException {
         try {
             OrganismNode temp = new OrganismNode(name);
             temp.setPlant(true);
@@ -135,10 +213,22 @@ public class OrganismTree {
                 cursor.setRight(temp);
             size++;
         } catch (Exception e) {
-            // TODO: handle exception
+            if (e instanceof IllegalArgumentException)
+                System.err.println("Error, Illegal Argument exception");
+            else
+                System.err.println("Error, Position Not Avilable Exception");
         }
     }
 
+    /**
+     * Removes the child node of cursor with name name, and properly shifts the
+     * deleted node’s other siblings if necessary. If the deleted node has any
+     * descendants, those nodes are deleted as well.
+     * 
+     * @param name The name of the node to be deleted.
+     * @throws IllegalArgumentException Thrown if name does not reference a direct
+     *                                  child of the cursor.
+     */
     public void removeChild(String name) throws IllegalArgumentException {
         try {
             if (cursor.getLeft().getName().equals(name))
@@ -148,8 +238,8 @@ public class OrganismTree {
             else if (cursor.getRight().getName().equals(name))
                 cursor.setRight(null);
             size--;
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: illegal Argument");
         }
     }
 

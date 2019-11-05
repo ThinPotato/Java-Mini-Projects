@@ -16,13 +16,11 @@ public class FoodPyramid {
             printMenu();
             in = scan.nextLine();
             if (in.equalsIgnoreCase("PC")) {
-                // TODO: Create New Plant Child
                 System.out.println("What is the name of the organism?: ");
                 in = scan.nextLine();
                 tree.addPlantChild(in);
                 System.out.println(in + " has successfully been added as prey for the " + tree.getCursor().getName());
             } else if (in.equalsIgnoreCase("AC")) {
-                // TODO: Create new animal child
                 System.out.println("What is the name of the Organism?");
                 String name = scan.nextLine();
                 System.out.println("Is the organism an herbivore / a carnivore / an omnivore? (H / C / O):");
@@ -37,31 +35,25 @@ public class FoodPyramid {
                 System.out.println(
                         "A " + name + " has successfully been added as prey for the " + tree.getCursor().getName());
             } else if (in.equalsIgnoreCase("RC")) {
-                // TODO: Remove Child
                 System.out.println("What is the name of the organism to be removed?: ");
                 in = scan.nextLine();
                 tree.removeChild(in);
                 System.out.println(
                         "A " + in + " has been successfully removed as prey for the " + tree.getCursor().getName());
             } else if (in.equalsIgnoreCase("P")) {
-                // TODO: Print out the cursor's prey
                 System.out.println(tree.listPrey());
             } else if (in.equalsIgnoreCase("C")) {
                 // TODO: Print out food chain
                 System.out.println(tree.listFoodChain());
             } else if (in.equalsIgnoreCase("F")) {
-                // TODO: Print out food pyramid at cursor
                 tree.printOrganismTree();
             } else if (in.equalsIgnoreCase("LP")) {
-                // TODO: List all plants supporting Cursor
                 System.out.println(tree.listAllPlants());
 
             } else if (in.equalsIgnoreCase("R")) {
-                // TODO: reset cursor to root
                 tree.cursorReset();
                 System.out.println("Cursor successfully reset to root!");
             } else if (in.equalsIgnoreCase("M")) {
-                // TODO: Move cursor to child
                 System.out.println("Which child should the cursor be moved to?: ");
                 in = scan.nextLine();
                 tree.moveCursor(in);
