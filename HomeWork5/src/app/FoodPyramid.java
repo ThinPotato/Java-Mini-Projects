@@ -16,10 +16,15 @@ public class FoodPyramid {
             printMenu();
             in = scan.nextLine();
             if (in.equalsIgnoreCase("PC")) {
-                System.out.println("What is the name of the organism?: ");
-                in = scan.nextLine();
-                tree.addPlantChild(in);
-                System.out.println(in + " has successfully been added as prey for the " + tree.getCursor().getName());
+                if (!tree.getCursor().getIsPlant()) {
+                    System.out.println("What is the name of the organism?: ");
+                    in = scan.nextLine();
+                    tree.addPlantChild(in);
+                    System.out
+                            .println(in + " has successfully been added as prey for the " + tree.getCursor().getName());
+                } else {
+                    System.err.println("ERROR: The cursor is a plant. plants cannot be predators.");
+                }
             } else if (in.equalsIgnoreCase("AC")) {
                 System.out.println("What is the name of the Organism?");
                 String name = scan.nextLine();
@@ -63,11 +68,11 @@ public class FoodPyramid {
     }
 
     public static void hco(OrganismNode node, String in) {
-        if (in.equals("H"))
+        if (in.equalsIgnoreCase("H"))
             node.setHerbivore(true);
-        else if (in.equals("C"))
+        else if (in.equalsIgnoreCase("C"))
             node.setCarnivore(true);
-        else if (in.equals("O")) {
+        else if (in.equalsIgnoreCase("O")) {
             node.setCarnivore(true);
             node.setHerbivore(true);
         }

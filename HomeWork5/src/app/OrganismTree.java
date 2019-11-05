@@ -159,17 +159,22 @@ public class OrganismTree {
     public void addAnimalChild(String name, boolean isHerbivore, boolean isCarnivore)
             throws IllegalArgumentException, PositionNotAvailableExceptoin {
         try {
-            OrganismNode temp = new OrganismNode(name);
-            temp.setHerbivore(isHerbivore);
-            temp.setCarnivore(isCarnivore);
-            if (cursor.getLeft() == null)
-                cursor.setLeft(temp);
-            else if (cursor.getMiddle() == null)
-                cursor.setMiddle(temp);
-            else if (cursor.getRight() == null)
-                cursor.setRight(temp);
-            temp.setParent(cursor);
-            size++;
+            if (cursor.getIsCarnivore()) {
+                OrganismNode temp = new OrganismNode(name);
+                temp.setHerbivore(isHerbivore);
+                temp.setCarnivore(isCarnivore);
+                if (cursor.getLeft() == null)
+                    cursor.setLeft(temp);
+                else if (cursor.getMiddle() == null)
+                    cursor.setMiddle(temp);
+                else if (cursor.getRight() == null)
+                    cursor.setRight(temp);
+                else
+                    System.err.println("ERROR: There is no more room in for this predator.");
+                temp.setParent(cursor);
+                size++;
+            } else
+                System.err.println("ERROR: This prey cannot be added as it does not match the diet of the predator.");
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException)
                 System.err.println("Error, Illegal Argument exception");
@@ -221,12 +226,14 @@ public class OrganismTree {
      */
     public void removeChild(String name) throws IllegalArgumentException {
         try {
-            if (cursor.getLeft().getName().equalsIgnoreCase(name))
+            if (cursor.getLeft() != null && cursor.getLeft().getName().equalsIgnoreCase(name))
                 cursor.setLeft(null);
-            else if (cursor.getMiddle().getName().equalsIgnoreCase(name))
+            else if (cursor.getLeft() != null && cursor.getMiddle().getName().equalsIgnoreCase(name))
                 cursor.setMiddle(null);
-            else if (cursor.getRight().getName().equalsIgnoreCase(name))
+            else if (cursor.getLeft() != null && cursor.getRight().getName().equalsIgnoreCase(name))
                 cursor.setRight(null);
+            else
+                System.err.println("ERROR: not found");
             size--;
         } catch (IllegalArgumentException e) {
             System.err.println("Error: illegal Argument");
