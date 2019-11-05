@@ -48,9 +48,10 @@ public class FoodPyramid {
                 System.out.println(tree.listPrey());
             } else if (in.equalsIgnoreCase("C")) {
                 // TODO: Print out food chain
-                tree.printOrganismTree();
+                tree.listFoodChain();
             } else if (in.equalsIgnoreCase("F")) {
                 // TODO: Print out food pyramid at cursor
+                tree.printOrganismTree();
             } else if (in.equalsIgnoreCase("LP")) {
                 // TODO: List all plants supporting Cursor
                 System.out.println(tree.listAllPlants());

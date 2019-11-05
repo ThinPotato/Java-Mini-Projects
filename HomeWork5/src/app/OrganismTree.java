@@ -7,6 +7,7 @@ public class OrganismTree {
     OrganismNode root = new OrganismNode();
     OrganismNode cursor = new OrganismNode();
     int size = 0;
+    String proccessString = "";
 
     OrganismTree(OrganismNode apexPredator) {
         root = apexPredator;
@@ -57,39 +58,40 @@ public class OrganismTree {
 
     public void printOrganismTree() {
         OrganismNode save = cursor;
-        System.out.println(traverseTree(save, 0));
+        proccessString = "";
+        traverseTree(save);
+        System.out.println(proccessString);
     }
 
     public String listAllPlants() {
         // TODO: redo this method
-        return returnleafs(cursor);
+        proccessString = "";
+        organizePlants(cursor);
+        proccessString = proccessString.substring(0, proccessString.length() - 1);
+        return proccessString;
     }
 
-    private String[] traverseTree(OrganismNode temp, int i) {
-        String hold[] = new String[size];
+    private void traverseTree(OrganismNode temp) {
         if (temp.getLeft() != null)
-            traverseTree(temp.getLeft(), i++);
-        hold[i] = temp.getName();
+            traverseTree(temp.getLeft());
+        proccessString += temp.getName() + "-";
         if (temp.getMiddle() != null)
-            traverseTree(temp.getMiddle(), i++);
+            traverseTree(temp.getMiddle());
         if (temp.getRight() != null)
-            traverseTree(temp.getRight(), i++);
-        return hold;
+            traverseTree(temp.getRight());
     }
 
-    private String returnleafs(OrganismNode temp) {
+    private void organizePlants(OrganismNode temp) {
         // TODO: this may not connect to listAllPlants() properly
-        String string = "";
         if (temp.getLeft() != null)
-            returnleafs(temp.getLeft());
+            organizePlants(temp.getLeft());
         if (temp.getMiddle() != null)
-            returnleafs(temp.getMiddle());
+            organizePlants(temp.getMiddle());
         if (temp.getRight() != null)
-            returnleafs(temp.getRight());
-        if (temp.left == null && temp.middle == null && temp.right == null) {
-            string += temp.getName();
+            organizePlants(temp.getRight());
+        if (temp.left == null && temp.middle == null && temp.right == null && temp.getIsPlant() == true) {
+            proccessString += temp.getName() + ", ";
         }
-        return string;
     }
 
     public void addAnimalChild(String name, boolean isHerbivore, boolean isCarnivore)
@@ -114,11 +116,12 @@ public class OrganismTree {
     public void addPlantChild(String name) throws IllegalArgumentException, PositionNotAvailableExceptoin {
         try {
             OrganismNode temp = new OrganismNode(name);
-            if (cursor.getLeft() != null)
+            temp.setPlant(true);
+            if (cursor.getLeft() == null)
                 cursor.setLeft(temp);
-            else if (cursor.getMiddle() != null)
+            else if (cursor.getMiddle() == null)
                 cursor.setMiddle(temp);
-            else if (cursor.getRight() != null)
+            else if (cursor.getRight() == null)
                 cursor.setRight(temp);
             size++;
         } catch (Exception e) {
