@@ -30,11 +30,11 @@ public class OrganismTree {
      */
     public void moveCursor(String name) throws IllegalArgumentException {
         try {
-            if (cursor.getLeft().getName().equals(name))
+            if (cursor.getLeft().getName().equalsIgnoreCase(name))
                 cursor = cursor.getLeft();
-            else if (cursor.getMiddle().getName().equals(name))
+            else if (cursor.getMiddle().getName().equalsIgnoreCase(name))
                 cursor = cursor.getMiddle();
-            else if (cursor.getRight().getName().equals(name))
+            else if (cursor.getRight().getName().equalsIgnoreCase(name))
                 cursor = cursor.getRight();
         } catch (IllegalArgumentException e) {
             System.err.println("Error, IllegalArgumentException");
@@ -49,13 +49,14 @@ public class OrganismTree {
      * @throws IsPlantException
      */
     public String listPrey() throws IsPlantException {
-        String temp = cursor.getName() + " - > ";
+        String temp = cursor.getName() + "-> ";
         if (cursor.getLeft() != null)
             temp += cursor.getLeft().getName() + ", ";
         if (cursor.getMiddle() != null)
             temp += cursor.getMiddle().getName() + ", ";
         if (cursor.getRight() != null)
-            temp += cursor.getRight().getName();
+            temp += cursor.getRight().getName() + ", ";
+        temp = temp.substring(0, temp.length() - 2);
         return temp;
     }
 
@@ -70,12 +71,13 @@ public class OrganismTree {
     public String listFoodChain() {
         // TODO: redo this method
         proccessString = "";
-        test(root, 0);
-        String[] temp = proccessString.split(", ");
+        findParents(cursor);
+        String temp[] = proccessString.split(", ");
         proccessString = "";
-        for (int i = 1; i < temp.length; i += 2) {
-            proccessString += temp[i] + "<- ";
+        for (int i = temp.length - 1; i >= 0; i--) {
+            proccessString += temp[i] + "-> ";
         }
+        proccessString = proccessString.substring(0, proccessString.length() - 3);
         return proccessString;
     }
 
@@ -96,11 +98,18 @@ public class OrganismTree {
      * @return A String containing a list of all the plants in the food pyramid.
      */
     public String listAllPlants() {
-        // TODO: redo this method
         proccessString = "";
         organizePlants(cursor);
-        proccessString = proccessString.substring(0, proccessString.length() - 1);
+        proccessString = proccessString.substring(0, proccessString.length() - 2);
         return proccessString;
+    }
+
+    private void findParents(OrganismNode temp) {
+        do {
+            proccessString += temp.getName() + ", ";
+            temp = temp.getParent();
+        } while (temp.parent == root);
+        proccessString += temp.getName();
     }
 
     private void organizeTree(OrganismNode temp, int i) {
@@ -118,28 +127,6 @@ public class OrganismTree {
             organizeTree(temp.getMiddle(), i);
         if (temp.getRight() != null)
             organizeTree(temp.getRight(), i);
-    }
-
-    private void traverseTree(OrganismNode temp) {
-        if (temp.getLeft() != null)
-            traverseTree(temp.getLeft());
-        if (temp.getMiddle() != null)
-            traverseTree(temp.getMiddle());
-        if (temp.getRight() != null)
-            traverseTree(temp.getRight());
-        proccessString += temp.getName() + "-";
-    }
-
-    private boolean test(OrganismNode temp, int i) {
-        proccessString += root.getName() + ", ";
-
-        if (test(root.getLeft(), i) || test(root.getMiddle(), i) || test(root.getRight(), i))
-            return true;
-        proccessString = proccessString.substring(0, i - 2);
-        String[] t = proccessString.split(", ");
-        t[i] = "";
-        proccessString = t.toString();
-        return false;
     }
 
     private void organizePlants(OrganismNode temp) {
@@ -180,6 +167,7 @@ public class OrganismTree {
                 cursor.setMiddle(temp);
             else if (cursor.getRight() == null)
                 cursor.setRight(temp);
+            temp.setParent(cursor);
             size++;
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException)
@@ -212,6 +200,7 @@ public class OrganismTree {
             else if (cursor.getRight() == null)
                 cursor.setRight(temp);
             size++;
+            temp.setParent(cursor);
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException)
                 System.err.println("Error, Illegal Argument exception");

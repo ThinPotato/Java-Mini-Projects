@@ -11,6 +11,7 @@ public class OrganismNode {
     OrganismNode left;
     OrganismNode right;
     OrganismNode middle;
+    OrganismNode parent;
 
     OrganismNode() {
 
@@ -88,6 +89,20 @@ public class OrganismNode {
      */
     public OrganismNode getRight() {
         return right;
+    }
+
+    /**
+     * @return the parent
+     */
+    public OrganismNode getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(OrganismNode parent) {
+        this.parent = parent;
     }
 
     /**
