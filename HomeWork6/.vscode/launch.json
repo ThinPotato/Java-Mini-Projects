@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TextAnalyzer",
+            "request": "launch",
+            "mainClass": "app.TextAnalyzer",
+            "projectName": "HomeWork6"
+        }
+    ]
+}

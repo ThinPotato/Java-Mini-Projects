@@ -9,8 +9,9 @@ class Passage {
     int wordCount;
     Hashtable<String, Double> similarTitles = new Hashtable<String, Double>();
     Hashtable<String, Integer> table = new Hashtable<String, Integer>();
-    String[] stopWords = new File("/home/bryce/Development/CSE214/HomeWork6/src/app/Stopwords.txt").toString()
-            .split("\\r?\\n");
+    String[] stopWords = new File(
+            "A:\\Users\\bryce\\Documents\\Development\\CSE214\\HomeWork6\\src\\app\\Stopwords.txt").toString()
+                    .split("\\r?\\n");
 
     public Passage(String title, File file) {
         this.title = title;
@@ -18,7 +19,22 @@ class Passage {
     }
 
     public static double cosineSimilarity(Passage passage1, Passage passage2) {
+        double top = 0;
+        double bot1 = 0;
+        double bot2 = 0;
+        String words[] = ((passage1.wordCount > passage2.wordCount) ? passage1.getWords().toArray(new String[0])
+                : passage2.getWords().toArray(new String[0]));
 
+        passage1.getWords().toArray(new String[0]);
+
+        for (int i = 0; i < words.length; i++) {
+            top += passage1.getWordFrequency(words[i]) * passage2.getWordFrequency(words[i]);
+            bot1 += (Math.pow((Double) (passage1.getWordFrequency(words[i])), 2));
+            bot2 += (Math.pow((Double) (passage2.getWordFrequency(words[i])), 2));
+        }
+        passage1.similarTitles.put(passage2.getTitle(), 100 * (top / (Math.sqrt(bot1) * Math.sqrt(bot2))));
+        passage2.similarTitles.put(passage1.getTitle(), 100 * (top / (Math.sqrt(bot1) * Math.sqrt(bot2))));
+        return 100 * (top / (Math.sqrt(bot1) * Math.sqrt(bot2)));
     }
 
     public void parseFile(File file) {
@@ -66,6 +82,6 @@ class Passage {
 
     @Override
     public String toString() {
-        return super.toString();
+        return similarTitles.toString();
     }
 }
