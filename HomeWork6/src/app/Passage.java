@@ -1,7 +1,6 @@
 package app;
 
 import java.io.File;
-import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
 
