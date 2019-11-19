@@ -18,6 +18,10 @@ class Passage {
         parseFile(file);
     }
 
+    public static double cosineSimilarity(Passage passage1, Passage passage2) {
+
+    }
+
     public void parseFile(File file) {
         // TODO: implement method
         String[] parsedFile = file.toString().replaceAll("[^A-Za-z0-9]", "").toLowerCase().split(" ");
