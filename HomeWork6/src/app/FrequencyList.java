@@ -21,11 +21,18 @@ class FrequencyList {
         }
     }
 
+    /**
+     * @param p the passage to use
+     */
     public void addPassage(Passage p) {
         passageIndices.put(p.getTitle(), i++);
         frequencies.add((int) p.getWordFrequency(word) * 100);
     }
 
+    /**
+     * @return the frequency of p
+     * @param p the passage to look in
+     */
     public int getFrequency(Passage p) {
         if (passageIndices.contains(word))
             return (int) (p.getWordFrequency(word) * 100);

@@ -30,6 +30,12 @@ class Passage {
         stopWords = content.split("\\r?\\n");
     }
 
+    /**
+     * @return the value of the cosine function multiplied as 100 to be used as a
+     *         percentage.
+     * @param passage1 the first passage to check
+     * @param passage  2 the passage to check against
+     */
     public static double cosineSimilarity(Passage passage1, Passage passage2) {
         double top = 0;
         double bot1 = 0;
@@ -52,6 +58,9 @@ class Passage {
         return finalanswer;
     }
 
+    /**
+     * @param file the file to parse
+     */
     public void parseFile(File file) {
         processStopWords();
         String content = "";
@@ -80,6 +89,10 @@ class Passage {
         }
     }
 
+    /**
+     * @return the frequency of a word amongst all the words in its passage
+     *         expressed as a fraction.
+     */
     public double getWordFrequency(String word) {
         if (table.get(word) == null)
             return 0;
@@ -88,30 +101,51 @@ class Passage {
         return (double) table.get(word) / wordCount;
     }
 
+    /**
+     * @return the words in a passage as a set
+     */
     public Set<String> getWords() {
         return table.keySet();
     }
 
+    /**
+     * @ return the title of the document
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return the number of words in a passage
+     */
     public int getWordCount() {
         return wordCount;
     }
 
+    /**
+     * @param wordcount the number to change the word count to
+     */
     public void setWordCount(int wordCount) {
         this.wordCount = wordCount;
     }
 
+    /**
+     * @return the hastable of similar titles
+     */
     public Hashtable<String, Double> getSimilarTitles() {
         return similarTitles;
     }
 
+    /**
+     * @param similarTitles the hashtable to use
+     */
     public void setSimilarTitles(Hashtable<String, Double> similarTitles) {
         this.similarTitles = similarTitles;
     }
 
+    /**
+     * @return all the similar titles in string form
+     */
     @Override
     public String toString() {
         return similarTitles.toString();
