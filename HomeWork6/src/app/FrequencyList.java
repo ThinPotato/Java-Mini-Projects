@@ -9,6 +9,11 @@ class FrequencyList {
     Hashtable<String, Integer> passageIndices;
     int i = 0;
 
+    public FrequencyList(String word, Passage passage) {
+        this.word = word;
+        addPassage(passage);
+    }
+
     public FrequencyList(String word, ArrayList<Passage> passages) {
         this.word = word;
         for (int k = 0; k < passages.size(); k++) {

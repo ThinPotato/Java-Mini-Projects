@@ -10,8 +10,10 @@ public class TextAnalyzer {
         System.out.println("Enter the directory of a folder of text files: ");
         in = scan.nextLine();
         File[] directoryOfFiles = new File(in).listFiles();
+        FrequencyTable mainTable = new FrequencyTable();
+
         for (File i : directoryOfFiles) {
-            i.
+            mainTable.addPassage(new Passage(i.getName(), i));
         }
     }
 }

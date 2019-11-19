@@ -22,7 +22,6 @@ class Passage {
     }
 
     public void parseFile(File file) {
-        // TODO: implement method
         String[] parsedFile = file.toString().replaceAll("[^A-Za-z0-9]", "").toLowerCase().split(" ");
         for (int i = 0; i < parsedFile.length; i++) {
             for (int k = 0; k < stopWords.length; k++) {
