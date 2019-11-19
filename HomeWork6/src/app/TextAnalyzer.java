@@ -17,6 +17,7 @@ public class TextAnalyzer {
         for (File i : directoryOfFiles) {
             list.add(new Passage(i.getName(), i));
         }
+        System.out.println("Passage added");
 
         for (Passage i : list) {
             for (int k = 0; k < list.size(); k++) {
@@ -24,9 +25,15 @@ public class TextAnalyzer {
                     Passage.cosineSimilarity(i, list.get(k));
             }
         }
-
+        System.out.println("similarities processed.");
         for (Passage i : list) {
-            System.out.println(i.toString());
+            String temp[] = i.toString().replaceAll("\\{|\\}", "").split(", ");
+            // System.out.println(i.toString());
+            System.out.printf("%s", i.getTitle() + ": ");
+            for (int k = 0; k < temp.length; k++) {
+                System.out.printf("%s", temp[k] + ", ");
+            }
+            System.out.println("\n");
         }
 
     }
