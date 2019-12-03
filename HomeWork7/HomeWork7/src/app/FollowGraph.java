@@ -75,11 +75,6 @@ public class FollowGraph implements Serializable {
     public List<String> allPaths(String userFrom, String userTo) {
         // TODO: Shortest Path Alogirthm
         List<String> list;
-        for (int i = 0; i < connections.length; i++) {
-            for (int j = 0; j < connections.length; j++) {
-
-            }
-        }
     }
 
     public void printAllUsers(Comparator comp) {
@@ -105,6 +100,12 @@ public class FollowGraph implements Serializable {
 
     public List[String] findAllLoops(){
         //TODO: Shortest Path Alogirthm.
+    }
+
+    public static ArrayList<ArrayList<String>> getAllPaths() {
+        ArrayList pathList;
+        ArrayList<String> path;
+
     }
 
     public void loadAllUsers(String filename) {
