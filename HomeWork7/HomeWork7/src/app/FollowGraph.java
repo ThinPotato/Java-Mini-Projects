@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * FollowerGraph
@@ -38,11 +39,47 @@ public class FollowGraph implements Serializable {
     }
 
     public String shortestPath(String userFrom, String userTo) {
-        // TODO: Shortest Path Algorithm
+        int edgeCount;
+        Double dist[][] = new Double[connections.length][connections.length]; // connections.length prob wrong
+        int next[][] = new int[connections.length][connections.length];
+        for (int u = 0; u < connections.length; u++) {
+            for (int v = 0; v < connections.length; v++) {
+                dist[u][v] = Double.POSITIVE_INFINITY;
+                if (connections[u][v] == true) {
+                    dist[u][v] = 1.0;
+                    next[u][v] = v;
+                    for (int k = 1; u < v; k++) {
+                        for (int i = 1; i < v; i++) {
+                            for (int j = 1; j < v; j++) {
+                                if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                                    dist[i][j] = dist[i][j] + dist[k][j];
+                                    next[i][j] = next[i][k];
+                                }
+                            }
+                        }
+                    }
+                }
+                if (next[u][v] == null) {
+                    return [];
+                }
+                path = [u];
+                while(u != v){
+                    u = next[u][v];
+                    path.
+                }
+            }
+        }
+
     }
 
-    public List[String] allPaths(String userFrom, String userTo){
-        //TODO: Shortest Path Alogirthm
+    public List<String> allPaths(String userFrom, String userTo) {
+        // TODO: Shortest Path Alogirthm
+        List<String> list;
+        for (int i = 0; i < connections.length; i++) {
+            for (int j = 0; j < connections.length; j++) {
+
+            }
+        }
     }
 
     public void printAllUsers(Comparator comp) {
