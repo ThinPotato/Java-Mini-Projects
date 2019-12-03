@@ -1,3 +1,6 @@
+/**
+ * @author Bryce Stoker 111999983 R02 Bryce.stoker-schaeffer@stonybrook.edu a
+ */
 package app;
 
 /**
@@ -8,9 +11,10 @@ public class User {
     private int indexPos = -1;
     private static int userCount = 0;
 
-    public User() {
-
+    public User(String userName) {
+        this.userName = userName;
         userCount++;
+        indexPos++;
     }
 
     /**
@@ -36,7 +40,7 @@ public class User {
 
     @Override
     public String toString() {
-        return userName + ", " + indexPos + ", " + userCount;
+        return userName;
     }
 
     /**

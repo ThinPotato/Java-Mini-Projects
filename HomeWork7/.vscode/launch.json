@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FollowGraphDriver",
+            "request": "launch",
+            "mainClass": "app.FollowGraphDriver",
+            "projectName": "HomeWork7"
+        }
+    ]
+}
