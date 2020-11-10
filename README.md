@@ -1,2 +1,2 @@
-# CSE214
-All my work for CSE 214
+# Java Mini-Projects
+Each HW is a different project to demonstrate and practice the use of data structures in Java.
